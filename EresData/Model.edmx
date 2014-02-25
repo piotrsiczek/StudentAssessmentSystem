@@ -1,0 +1,566 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="NTR2013Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="NTR2013ModelStoreContainer">
+          <EntitySet Name="Grades" EntityType="NTR2013Model.Store.Grades" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="GradeValues" EntityType="NTR2013Model.Store.GradeValues" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Groups" EntityType="NTR2013Model.Store.Groups" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Realisations" EntityType="NTR2013Model.Store.Realisations" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Registrations" EntityType="NTR2013Model.Store.Registrations" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Semesters" EntityType="NTR2013Model.Store.Semesters" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Students" EntityType="NTR2013Model.Store.Students" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Subjects" EntityType="NTR2013Model.Store.Subjects" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Grades_Realisations" Association="NTR2013Model.Store.FK_Grades_Realisations">
+            <End Role="Realisations" EntitySet="Realisations" />
+            <End Role="Grades" EntitySet="Grades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GradeValues_Grades" Association="NTR2013Model.Store.FK_GradeValues_Grades">
+            <End Role="Grades" EntitySet="Grades" />
+            <End Role="GradeValues" EntitySet="GradeValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GradeValues_Registrations" Association="NTR2013Model.Store.FK_GradeValues_Registrations">
+            <End Role="Registrations" EntitySet="Registrations" />
+            <End Role="GradeValues" EntitySet="GradeValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Realisations_Semesters" Association="NTR2013Model.Store.FK_Realisations_Semesters">
+            <End Role="Semesters" EntitySet="Semesters" />
+            <End Role="Realisations" EntitySet="Realisations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Realisations_Subjects" Association="NTR2013Model.Store.FK_Realisations_Subjects">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Realisations" EntitySet="Realisations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registrations_Realisations" Association="NTR2013Model.Store.FK_Registrations_Realisations">
+            <End Role="Realisations" EntitySet="Realisations" />
+            <End Role="Registrations" EntitySet="Registrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registrations_Students" Association="NTR2013Model.Store.FK_Registrations_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Registrations" EntitySet="Registrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Groups" Association="NTR2013Model.Store.FK_Students_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Grades">
+          <Key>
+            <PropertyRef Name="GradeID" />
+          </Key>
+          <Property Name="GradeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RealisationID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="MaxValue" Type="nvarchar" Nullable="false" MaxLength="64" />
+          <Property Name="TimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="GradeValues">
+          <Key>
+            <PropertyRef Name="GradeValueID" />
+          </Key>
+          <Property Name="GradeValueID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="GradeID" Type="int" Nullable="false" />
+          <Property Name="RegistrationID" Type="int" Nullable="false" />
+          <Property Name="Value" Type="nchar" Nullable="false" MaxLength="10" />
+          <Property Name="Date" Type="nchar" Nullable="false" MaxLength="10" />
+          <Property Name="TimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="GroupID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Realisations">
+          <Key>
+            <PropertyRef Name="RealisationID" />
+          </Key>
+          <Property Name="RealisationID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SubjectID" Type="int" Nullable="false" />
+          <Property Name="SemesterID" Type="int" Nullable="false" />
+          <Property Name="TimeStamp" Type="timestamp" Nullable="false" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Registrations">
+          <Key>
+            <PropertyRef Name="RegistrationID" />
+          </Key>
+          <Property Name="RegistrationID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="StudentID" Type="int" Nullable="false" />
+          <Property Name="RealisationID" Type="int" Nullable="false" />
+          <Property Name="TimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Semesters">
+          <Key>
+            <PropertyRef Name="SemesterID" />
+          </Key>
+          <Property Name="SemesterID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nchar" Nullable="false" MaxLength="10" />
+          <Property Name="TimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="GroupID" Type="int" Nullable="false" />
+          <Property Name="IndexNo" Type="char" Nullable="false" MaxLength="10" />
+          <Property Name="TimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Subjects">
+          <Key>
+            <PropertyRef Name="SubjectID" />
+          </Key>
+          <Property Name="SubjectID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Conspect" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="url" Type="nvarchar" MaxLength="50" />
+          <Property Name="TimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <Association Name="FK_Grades_Realisations">
+          <End Role="Realisations" Type="NTR2013Model.Store.Realisations" Multiplicity="1" />
+          <End Role="Grades" Type="NTR2013Model.Store.Grades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Realisations">
+              <PropertyRef Name="RealisationID" />
+            </Principal>
+            <Dependent Role="Grades">
+              <PropertyRef Name="RealisationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GradeValues_Grades">
+          <End Role="Grades" Type="NTR2013Model.Store.Grades" Multiplicity="1" />
+          <End Role="GradeValues" Type="NTR2013Model.Store.GradeValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grades">
+              <PropertyRef Name="GradeID" />
+            </Principal>
+            <Dependent Role="GradeValues">
+              <PropertyRef Name="GradeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GradeValues_Registrations">
+          <End Role="Registrations" Type="NTR2013Model.Store.Registrations" Multiplicity="1" />
+          <End Role="GradeValues" Type="NTR2013Model.Store.GradeValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registrations">
+              <PropertyRef Name="RegistrationID" />
+            </Principal>
+            <Dependent Role="GradeValues">
+              <PropertyRef Name="RegistrationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Realisations_Semesters">
+          <End Role="Semesters" Type="NTR2013Model.Store.Semesters" Multiplicity="1" />
+          <End Role="Realisations" Type="NTR2013Model.Store.Realisations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Semesters">
+              <PropertyRef Name="SemesterID" />
+            </Principal>
+            <Dependent Role="Realisations">
+              <PropertyRef Name="SemesterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Realisations_Subjects">
+          <End Role="Subjects" Type="NTR2013Model.Store.Subjects" Multiplicity="1" />
+          <End Role="Realisations" Type="NTR2013Model.Store.Realisations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="Realisations">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registrations_Realisations">
+          <End Role="Realisations" Type="NTR2013Model.Store.Realisations" Multiplicity="1" />
+          <End Role="Registrations" Type="NTR2013Model.Store.Registrations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Realisations">
+              <PropertyRef Name="RealisationID" />
+            </Principal>
+            <Dependent Role="Registrations">
+              <PropertyRef Name="RealisationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registrations_Students">
+          <End Role="Students" Type="NTR2013Model.Store.Students" Multiplicity="1" />
+          <End Role="Registrations" Type="NTR2013Model.Store.Registrations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="Registrations">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Groups">
+          <End Role="Groups" Type="NTR2013Model.Store.Groups" Multiplicity="1" />
+          <End Role="Students" Type="NTR2013Model.Store.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NTR2013Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="NTR2013Entities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Grades" EntityType="NTR2013Model.Grades" />
+          <EntitySet Name="GradeValues" EntityType="NTR2013Model.GradeValues" />
+          <EntitySet Name="Groups" EntityType="NTR2013Model.Groups" />
+          <EntitySet Name="Realisations" EntityType="NTR2013Model.Realisations" />
+          <EntitySet Name="Registrations" EntityType="NTR2013Model.Registrations" />
+          <EntitySet Name="Semesters" EntityType="NTR2013Model.Semesters" />
+          <EntitySet Name="Students" EntityType="NTR2013Model.Students" />
+          <EntitySet Name="Subjects" EntityType="NTR2013Model.Subjects" />
+          <AssociationSet Name="FK_Grades_Realisations" Association="NTR2013Model.FK_Grades_Realisations">
+            <End Role="Realisations" EntitySet="Realisations" />
+            <End Role="Grades" EntitySet="Grades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GradeValues_Grades" Association="NTR2013Model.FK_GradeValues_Grades">
+            <End Role="Grades" EntitySet="Grades" />
+            <End Role="GradeValues" EntitySet="GradeValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GradeValues_Registrations" Association="NTR2013Model.FK_GradeValues_Registrations">
+            <End Role="Registrations" EntitySet="Registrations" />
+            <End Role="GradeValues" EntitySet="GradeValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Groups" Association="NTR2013Model.FK_Students_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Realisations_Semesters" Association="NTR2013Model.FK_Realisations_Semesters">
+            <End Role="Semesters" EntitySet="Semesters" />
+            <End Role="Realisations" EntitySet="Realisations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Realisations_Subjects" Association="NTR2013Model.FK_Realisations_Subjects">
+            <End Role="Subjects" EntitySet="Subjects" />
+            <End Role="Realisations" EntitySet="Realisations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registrations_Realisations" Association="NTR2013Model.FK_Registrations_Realisations">
+            <End Role="Realisations" EntitySet="Realisations" />
+            <End Role="Registrations" EntitySet="Registrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registrations_Students" Association="NTR2013Model.FK_Registrations_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="Registrations" EntitySet="Registrations" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Grades">
+          <Key>
+            <PropertyRef Name="GradeID" />
+          </Key>
+          <Property Name="GradeID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="RealisationID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="MaxValue" Type="String" Nullable="false" MaxLength="64" Unicode="true" FixedLength="false" />
+          <Property Name="TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" p1:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Realisations" Relationship="NTR2013Model.FK_Grades_Realisations" FromRole="Grades" ToRole="Realisations" />
+          <NavigationProperty Name="GradeValues" Relationship="NTR2013Model.FK_GradeValues_Grades" FromRole="Grades" ToRole="GradeValues" />
+        </EntityType>
+        <EntityType Name="GradeValues">
+          <Key>
+            <PropertyRef Name="GradeValueID" />
+          </Key>
+          <Property Name="GradeValueID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="GradeID" Type="Int32" Nullable="false" />
+          <Property Name="RegistrationID" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="Date" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" p1:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Grades" Relationship="NTR2013Model.FK_GradeValues_Grades" FromRole="GradeValues" ToRole="Grades" />
+          <NavigationProperty Name="Registrations" Relationship="NTR2013Model.FK_GradeValues_Registrations" FromRole="GradeValues" ToRole="Registrations" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="GroupID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Students" Relationship="NTR2013Model.FK_Students_Groups" FromRole="Groups" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="Realisations">
+          <Key>
+            <PropertyRef Name="RealisationID" />
+          </Key>
+          <Property Name="RealisationID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="SubjectID" Type="Int32" Nullable="false" />
+          <Property Name="SemesterID" Type="Int32" Nullable="false" />
+          <Property Name="TimeStamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" p1:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Grades" Relationship="NTR2013Model.FK_Grades_Realisations" FromRole="Realisations" ToRole="Grades" />
+          <NavigationProperty Name="Semesters" Relationship="NTR2013Model.FK_Realisations_Semesters" FromRole="Realisations" ToRole="Semesters" />
+          <NavigationProperty Name="Subjects" Relationship="NTR2013Model.FK_Realisations_Subjects" FromRole="Realisations" ToRole="Subjects" />
+          <NavigationProperty Name="Registrations" Relationship="NTR2013Model.FK_Registrations_Realisations" FromRole="Realisations" ToRole="Registrations" />
+        </EntityType>
+        <EntityType Name="Registrations">
+          <Key>
+            <PropertyRef Name="RegistrationID" />
+          </Key>
+          <Property Name="RegistrationID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="RealisationID" Type="Int32" Nullable="false" />
+          <Property Name="TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" p1:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="GradeValues" Relationship="NTR2013Model.FK_GradeValues_Registrations" FromRole="Registrations" ToRole="GradeValues" />
+          <NavigationProperty Name="Realisations" Relationship="NTR2013Model.FK_Registrations_Realisations" FromRole="Registrations" ToRole="Realisations" />
+          <NavigationProperty Name="Students" Relationship="NTR2013Model.FK_Registrations_Students" FromRole="Registrations" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="Semesters">
+          <Key>
+            <PropertyRef Name="SemesterID" />
+          </Key>
+          <Property Name="SemesterID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" p1:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Realisations" Relationship="NTR2013Model.FK_Realisations_Semesters" FromRole="Semesters" ToRole="Realisations" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="GroupID" Type="Int32" Nullable="false" />
+          <Property Name="IndexNo" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" p1:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Groups" Relationship="NTR2013Model.FK_Students_Groups" FromRole="Students" ToRole="Groups" />
+          <NavigationProperty Name="Registrations" Relationship="NTR2013Model.FK_Registrations_Students" FromRole="Students" ToRole="Registrations" />
+        </EntityType>
+        <EntityType Name="Subjects">
+          <Key>
+            <PropertyRef Name="SubjectID" />
+          </Key>
+          <Property Name="SubjectID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Conspect" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="url" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" p1:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Realisations" Relationship="NTR2013Model.FK_Realisations_Subjects" FromRole="Subjects" ToRole="Realisations" />
+        </EntityType>
+        <Association Name="FK_Grades_Realisations">
+          <End Role="Realisations" Type="NTR2013Model.Realisations" Multiplicity="1" />
+          <End Role="Grades" Type="NTR2013Model.Grades" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Realisations">
+              <PropertyRef Name="RealisationID" />
+            </Principal>
+            <Dependent Role="Grades">
+              <PropertyRef Name="RealisationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GradeValues_Grades">
+          <End Role="Grades" Type="NTR2013Model.Grades" Multiplicity="1" />
+          <End Role="GradeValues" Type="NTR2013Model.GradeValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grades">
+              <PropertyRef Name="GradeID" />
+            </Principal>
+            <Dependent Role="GradeValues">
+              <PropertyRef Name="GradeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GradeValues_Registrations">
+          <End Role="Registrations" Type="NTR2013Model.Registrations" Multiplicity="1" />
+          <End Role="GradeValues" Type="NTR2013Model.GradeValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registrations">
+              <PropertyRef Name="RegistrationID" />
+            </Principal>
+            <Dependent Role="GradeValues">
+              <PropertyRef Name="RegistrationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Groups">
+          <End Role="Groups" Type="NTR2013Model.Groups" Multiplicity="1" />
+          <End Role="Students" Type="NTR2013Model.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Realisations_Semesters">
+          <End Role="Semesters" Type="NTR2013Model.Semesters" Multiplicity="1" />
+          <End Role="Realisations" Type="NTR2013Model.Realisations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Semesters">
+              <PropertyRef Name="SemesterID" />
+            </Principal>
+            <Dependent Role="Realisations">
+              <PropertyRef Name="SemesterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Realisations_Subjects">
+          <End Role="Subjects" Type="NTR2013Model.Subjects" Multiplicity="1" />
+          <End Role="Realisations" Type="NTR2013Model.Realisations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subjects">
+              <PropertyRef Name="SubjectID" />
+            </Principal>
+            <Dependent Role="Realisations">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registrations_Realisations">
+          <End Role="Realisations" Type="NTR2013Model.Realisations" Multiplicity="1" />
+          <End Role="Registrations" Type="NTR2013Model.Registrations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Realisations">
+              <PropertyRef Name="RealisationID" />
+            </Principal>
+            <Dependent Role="Registrations">
+              <PropertyRef Name="RealisationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registrations_Students">
+          <End Role="Students" Type="NTR2013Model.Students" Multiplicity="1" />
+          <End Role="Registrations" Type="NTR2013Model.Registrations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="Registrations">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NTR2013ModelStoreContainer" CdmEntityContainer="NTR2013Entities">
+          <EntitySetMapping Name="Grades">
+            <EntityTypeMapping TypeName="NTR2013Model.Grades">
+              <MappingFragment StoreEntitySet="Grades">
+                <ScalarProperty Name="GradeID" ColumnName="GradeID" />
+                <ScalarProperty Name="RealisationID" ColumnName="RealisationID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MaxValue" ColumnName="MaxValue" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GradeValues">
+            <EntityTypeMapping TypeName="NTR2013Model.GradeValues">
+              <MappingFragment StoreEntitySet="GradeValues">
+                <ScalarProperty Name="GradeValueID" ColumnName="GradeValueID" />
+                <ScalarProperty Name="GradeID" ColumnName="GradeID" />
+                <ScalarProperty Name="RegistrationID" ColumnName="RegistrationID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="NTR2013Model.Groups">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Realisations">
+            <EntityTypeMapping TypeName="NTR2013Model.Realisations">
+              <MappingFragment StoreEntitySet="Realisations">
+                <ScalarProperty Name="RealisationID" ColumnName="RealisationID" />
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+                <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registrations">
+            <EntityTypeMapping TypeName="NTR2013Model.Registrations">
+              <MappingFragment StoreEntitySet="Registrations">
+                <ScalarProperty Name="RegistrationID" ColumnName="RegistrationID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="RealisationID" ColumnName="RealisationID" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Semesters">
+            <EntityTypeMapping TypeName="NTR2013Model.Semesters">
+              <MappingFragment StoreEntitySet="Semesters">
+                <ScalarProperty Name="SemesterID" ColumnName="SemesterID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="NTR2013Model.Students">
+              <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="IndexNo" ColumnName="IndexNo" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="NTR2013Model.Subjects">
+              <MappingFragment StoreEntitySet="Subjects">
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Conspect" ColumnName="Conspect" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
