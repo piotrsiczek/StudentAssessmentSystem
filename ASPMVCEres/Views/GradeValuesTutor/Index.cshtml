@@ -1,0 +1,113 @@
+﻿@model IEnumerable<EresData.Semesters>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section CSS
+{
+    <link href="@Url.Content("~/Content/scrollable_table.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/styles.css")" rel="stylesheet" type="text/css" />
+}
+
+tutor
+
+<table id="main">
+    <tr id="main_table">
+        <td>
+            <table id="semester_table" cellspacing="0">
+                <thead>
+                        <tr>
+                            <td>@Html.DisplayNameFor(model => model.Name)</td>
+                        </tr>
+                </thead>
+                <tbody>
+
+                @foreach (var item in Model) {
+                    <tr class="semester" id="semester_row_@item.SemesterID" onclick="row_mouse_click(this);" onmouseover="row_mouse_over(this);" onmouseout="row_mouse_out(this);">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </td>
+        <td>
+            <table id="subject_table" cellspacing="0">
+                <thead>
+                        <tr>
+                            <td>Przedmiot</td>
+                            <td>Konspekt</td>
+                            <td>Url</td>
+                        </tr>
+                </thead>
+                <tbody id="subject_table_rows">
+
+                </tbody>
+            </table>
+        </td>
+        <td>
+            <table id="student_table" cellspacing="0">
+                <thead>
+                        <tr>
+                            <td>Imie</td>
+                            <td>Nazwisko</td>
+                            <td>Indeks</td>
+                        </tr>
+                </thead>
+                <tbody id="student_table_rows">
+
+                </tbody>
+            </table>
+        </td>
+        
+        <td>
+            <table id="grade_values_table" cellspacing="0" style="width: 200px;">
+                <thead>
+                        <tr>
+                            <td>Ocena</td>
+                            <td>Wartość</td>
+                            <td></td>
+                        </tr>
+                </thead>
+                <tbody id="grade_values_table_rows">
+
+                </tbody>
+            </table>
+        </td>
+    </tr>
+
+
+</table>
+<input type="button" value="Zapisz" onclick="save();" />
+<div id="error"></div>
+
+
+@section JavaScript
+{
+   
+<script type="text/javascript" src="@Url.Content("/Scripts/jquery.tablescroll.js")"></script>
+<script type="text/javascript" src="@Url.Content("/Scripts/jquery.tablescroll.mouse.tutor.js")"></script>
+
+    
+<script>
+/*<![CDATA[*/
+
+jQuery(document).ready(function($)
+{
+    $('#student_table').tableScroll({ height: 300 });
+    
+    $('#semester_table').tableScroll({ height: 300 });
+    $('#subject_table').tableScroll({ height: 300 });
+    //$('#subject_table').tableScroll({ width: 300 });
+    $('#grade_values_table').tableScroll({ height: 100 });
+    
+
+});
+
+
+
+/*]]>*/
+</script>
+}

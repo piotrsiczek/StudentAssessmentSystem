@@ -1,0 +1,107 @@
+﻿@model IEnumerable<EresData.Grades>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section JavaScript
+{
+   <script type="text/javascript" src="@Url.Content("/Scripts/grade.js")"></script>
+}
+
+
+
+
+<input id="realizationIdHidden" type="hidden" value="@Model.ElementAt(0).RealisationID" />
+
+<table id="main">
+    <tr><td>
+<center><h2>Oceny cząstkowe</h2></center>
+
+
+<table border="1" cellpadding="2" cellspacing="0" style="width:400px">
+    <tr>
+        <!--
+        <th>
+            @Html.DisplayNameFor(model => model.GradeID)
+            
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RealisationID)
+        </th>
+        -->
+
+        <th>
+            Nazwa
+            <!--@Html.DisplayNameFor(model => model.Name)-->
+        </th>
+        <th>
+            Maksymalna wartość
+            <!--@Html.DisplayNameFor(model => model.MaxValue)-->
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr id="row_@item.GradeID">
+
+        <!--
+        <td>
+            @Html.DisplayFor(modelItem => item.GradeID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RealisationID)
+        </td>
+        -->
+
+        <td style="width:30%" class="field" id="name_@item.GradeID">@Html.DisplayFor(modelItem => item.Name)</td>
+        <td style="width:30%" class="field" id="max_@item.GradeID">@Html.DisplayFor(modelItem => item.MaxValue)</td>
+        
+        <td style="width:40%">
+
+            <input type="hidden" class="hidden_field" id="stamp_@item.GradeID" value="@item.TimeStamp[0]?@item.TimeStamp[1]?@item.TimeStamp[2]?@item.TimeStamp[3]?@item.TimeStamp[4]?@item.TimeStamp[5]?@item.TimeStamp[6]?@item.TimeStamp[7]" />
+            <input type="button" name="@item.GradeID" value="Edytuj" onclick='edit(this);'/>
+            <input type="button" name="@item.GradeID" value="Usuń" onclick='remove(this);'/>
+
+   
+            
+        </td>
+    </tr>
+}
+
+    </table>
+
+    <table id="gradesTable" border="1" cellpadding="2" cellspacing="0"  style="width:400px">
+    </table>
+
+    <table border="1" cellpadding="2" cellspacing="0"  style="width:400px">
+
+    <tr>
+        <!--
+        <td>
+            
+        </td>
+        <td>
+            
+        </td>
+        -->
+        <td style="width:30%">
+            
+            <input style="width:100px" id="partialGradeName" name="partialGradeName" type="text" value="" />
+        </td>
+        <td style="width:30%">
+            <input style="width:100px" id="partialGradeValue" name="partialGradeValue" type="text" value="" />
+        </td>
+        <td style="width:40%">
+            
+          
+            <input id="addEditButton" type="button" value="Dodaj" onclick="create();" />
+
+            <input style="display: none" id="cancelButton" type="button" value="Anuluj" onclick="cancel();"/>        
+        </td>
+    </tr>
+
+</table>
+<div id="error"></div>
+
+</td></tr></table>

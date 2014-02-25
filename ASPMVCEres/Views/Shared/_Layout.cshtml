@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/styles.css")
+    
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+    
+    @RenderSection("JavaScript", required: false)
+    @RenderSection("CSS", required: false)
+
+</head>
+<body>
+
+
+    <table id="main">
+        <tr><td colspan="3"><center><h2>ASP MVC ERES</h2></center></td></tr>
+        <tr>
+            <td>
+                 <a href="/Grade/ShowRealizations">Oceny cząstkowe</a>
+            </td>
+            <td>
+                 <a href="/GradeValues/Index">Wyświetl oceny</a>
+            </td>
+            <td>
+                 <a href="/GradeValuesTutor/Index">Wystaw ocene</a>
+            </td>
+        </tr>
+
+    </table>
+
+
+
+    @RenderBody()
+
+    
+    @RenderSection("scripts", required: false)
+</body>
+</html>
