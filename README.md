@@ -9,4 +9,3 @@
 * displaying students grades based on semester and subject
 * adding, editing students grades based on semester and subject
 * displaying, editing, removing grades
-
