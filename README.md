@@ -6,7 +6,7 @@ Modules:
 3. ErestTest is a unit test project
 
 Features:
-displaying students grades based on semester and subject
-adding, editing students grades based on semester and subject
-displaying, editing, removing grades
+1. displaying students grades based on semester and subject
+2. adding, editing students grades based on semester and subject
+3. displaying, editing, removing grades
 
